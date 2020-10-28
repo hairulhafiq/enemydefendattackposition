@@ -7,7 +7,7 @@ varification::varification(QWidget *parent) :
     ui(new Ui::varification)
 {
     ui->setupUi(this);
-    QPixmap pix("D:/git/enemyatkdefpos/Pic/verify.jpg");   //depends on your directory
+    QPixmap pix("D:/git/enemydefendattackposition/Pic/verify.jpg");   //depends on your directory
     ui->labelback->setPixmap(pix);
     Login conn;
     QSqlQueryModel * modal1 = new QSqlQueryModel();

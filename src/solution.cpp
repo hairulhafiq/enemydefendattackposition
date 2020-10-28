@@ -8,7 +8,7 @@ SOLUTION::SOLUTION(QWidget *parent) :
 {
     Login conn;
     ui->setupUi(this);
-    QPixmap pix("D:/git/enemyatkdefpos/Pic/solution.jpg");   //depends on your directory
+    QPixmap pix("D:/git/enemydefendattackposition/Pic/solution.jpg");   //depends on your directory
     ui->labelback->setPixmap(pix);
 
     QSqlQueryModel * modal1 = new QSqlQueryModel();

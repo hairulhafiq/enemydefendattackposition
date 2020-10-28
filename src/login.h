@@ -31,7 +31,7 @@ public:
         bool connOpen()
         {
             csmsDB = QSqlDatabase::addDatabase("QSQLITE");
-            csmsDB.setDatabaseName("D:/enemydefendattackposition/enemy");
+            csmsDB.setDatabaseName("D:/git/enemydefendattackposition/src/enemy");
 
 
             if(!csmsDB.open()){

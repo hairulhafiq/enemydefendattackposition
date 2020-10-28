@@ -7,7 +7,7 @@ RECCE::RECCE(QWidget *parent) :
     ui(new Ui::RECCE)
 {
     ui->setupUi(this);
-    QPixmap pix("C:/Users/Hairul Hafiq/Documents/enemyatkdefpos/Pic/recce.jpg");
+    QPixmap pix("D:/git/enemyatkdefpos/Pic/recce.jpg");
     ui->labelback->setPixmap(pix);
     int bigNo, smallNo;
 

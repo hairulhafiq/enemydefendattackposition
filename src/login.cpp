@@ -7,7 +7,7 @@ Login::Login(QWidget *parent)
     , ui(new Ui::Login)
 {
     ui->setupUi(this);
-    QPixmap pix("C:/Users/Hairul Hafiq/Documents/enemyatkdefpos/Pic/back.jpg");
+    QPixmap pix("D:/git/enemyatkdefpos/Pic/back.jpg");
     ui->labelback->setPixmap(pix);
 
     if(!connOpen())

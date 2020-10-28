@@ -1,15 +1,16 @@
-#include "varification.h"
-#include "ui_varification.h"
-#include "QMessageBox"
+#include "solution.h"
+#include "ui_solution.h"
+#include <QMessageBox>
 
-varification::varification(QWidget *parent) :
+SOLUTION::SOLUTION(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::varification)
+    ui(new Ui::SOLUTION)
 {
-    ui->setupUi(this);
-    QPixmap pix("C:/Users/Hairul Hafiq/Documents/enemyatkdefpos/Pic/verify.jpg");
-    ui->labelback->setPixmap(pix);
     Login conn;
+    ui->setupUi(this);
+    QPixmap pix("D:/git/enemyatkdefpos/Pic/solution.jpg");
+    ui->labelback->setPixmap(pix);
+
     QSqlQueryModel * modal1 = new QSqlQueryModel();
     QSqlQuery *q = new QSqlQuery(conn.csmsDB);
     q->prepare("SELECT ID from recce");
@@ -18,44 +19,25 @@ varification::varification(QWidget *parent) :
     ui->comboBox->setModel(modal1);
 }
 
-varification::~varification()
+SOLUTION::~SOLUTION()
 {
     delete ui;
 }
 
-void varification::on_pushButton_2_clicked()
+void SOLUTION::on_logoutbutton_clicked()
 {
-    Login conn;
-    QString id;
-    id = ui->comboBox->currentText();
-    QSqlQuery qry1;
-    qry1.prepare("update recce set process = 'verify' where ID = '"+id+"'");
-
-    if(qry1.exec()){
-        QMessageBox msgBox;
-        msgBox.setText("Recce has been verified!");
-        msgBox.exec();
-    }else {
-        QMessageBox msgBox;
-        msgBox.setText("Failed to upload");
-        msgBox.exec();
-    }
+    this->hide();
+    Login back;
+    back.setModal(true);
+    back.exec();
 }
 
-void varification::on_pushButton_3_clicked()
-{
-    this ->hide();
-    COMMAND options;
-    options.setModal(true);
-    options.exec();
-}
-
-void varification::on_pushButton_clicked()
+void SOLUTION::on_pushButton_clicked()
 {
     Login conn;
 
     QSqlQuery qry,qry1,qry2,qry3,qry4,qry5,qry6,qry7;
-    QString id,location,strength,exit,task,type,start,tactic;
+    QString id,location,strength,exit,task,type,start,tactic,solution;
     id = ui->comboBox->currentText();
     location = qry.exec("select en_location from recce where ID = '"+id+"'");
     strength = qry2.exec("select en_strength from recce where ID = '"+id+"'");
@@ -101,25 +83,44 @@ void varification::on_pushButton_clicked()
             tactic = "quick attack";
         }
     }
+
+    if(task == "DESTROY"){
+        solution = "Destroy everything in territory";
+    }
+    else if (task == "NEUTRALIZE"){
+        solution = "Dissable everything in territory";
+    }
+    else if (task == "CLEAR"){
+        solution = "Expel everything in enemy territory";
+    }
+
     QSqlQueryModel * modal = new QSqlQueryModel();
     QSqlQuery *qry8 = new QSqlQuery(conn.csmsDB);
     qry8->prepare("SELECT weapon1,weapon1_num,weapon2,weapon2_num,weapon3,weapon3_num,weapon4,weapon4_num,weapon5,weapon5_num,weapon6,weapon6_num,weapon7,weapon7_num from recce where ID = '"+id+"'");
     qry8->exec();
     modal->setQuery(*qry8);
-    ui->tableView->setModel(modal);
+    ui->tableView_3->setModel(modal);
 
     QSqlQueryModel * modal1 = new QSqlQueryModel();
     QSqlQuery *q = new QSqlQuery(conn.csmsDB);
     q->prepare("SELECT obstacle1,obstacle_location1,obstacle2,obstacle_location2,obstacle3,obstacle_location3,obstacle4,obstacle_location4,obstacle5,obstacle_location5,obstacle6,obstacle_location6 from recce where ID = '"+id+"'");
     q->exec();
     modal1->setQuery(*q);
-    ui->tableView_2->setModel(modal1);
+    ui->tableView_4->setModel(modal1);
 
-  ui->lineEditlocation -> setText("north 100 degree");
-  ui->lineEditstrength->setText("company");
-  ui->lineEditexit->setText("yes");
-  ui->lineEdittask->setText("DESTROY");
-  ui->lineEditstart->setText("sitting weapon and obstacle.");
-  ui->lineEdittype->setText("class2");
-  ui->lineEdittactic->setText("delibrate attack");
+  ui->lineEditlocation_2 -> setText("north 100 degree");
+  ui->lineEditstrength_2->setText("company");
+  ui->lineEditexit_2->setText("yes");
+  ui->lineEdittask_2->setText("DESTROY");
+  ui->lineEditstart_2->setText("sitting weapon and obstacle.");
+  ui->lineEdittype_2->setText("class2");
+  ui->lineEdittactic_2->setText("delibrate attack");
+}
+
+
+void SOLUTION::on_pushButton_2_clicked()
+{
+    QMessageBox msgBox;
+    msgBox.setText("DELIBRATE ATTACK because the order from high command is to DESTROY enemy with the strength of a COMPANY. ");
+    msgBox.exec();
 }

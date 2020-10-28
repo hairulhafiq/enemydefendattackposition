@@ -7,7 +7,7 @@ COMMAND::COMMAND(QWidget *parent) :
     ui(new Ui::COMMAND)
 {
     ui->setupUi(this);
-    QPixmap pix("C:/Users/Hairul Hafiq/Documents/enemyatkdefpos/Pic/command.jpg");
+    QPixmap pix("D:/git/enemyatkdefpos/Pic/command.jpg");
     ui->labelback->setPixmap(pix);
     Login conn;
 
